@@ -1,0 +1,13 @@
+.app-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar {
+    flex: 1 15%;
+    height: 100%;
+}
+
+main {
+    flex: 1 85%
+}
