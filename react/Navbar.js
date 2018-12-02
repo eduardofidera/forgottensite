@@ -1,5 +1,5 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => (
   <nav className="navbar">
@@ -12,8 +12,8 @@ const Navbar = () => (
     </ul>
     <ul className="navbar__main">
       <li>
-        <NavLink activeClassName="active" to="/about">
-          <span>About</span>
+        <NavLink activeClassName="active" to="/players">
+          <span>Players</span>
         </NavLink>
       </li>
     </ul>
