@@ -1,23 +1,29 @@
 .player {
     display: flex;
+    padding: 10px 0;
+    background: #fafafa;
+
+    &:nth-child(even) {
+        background: #eaeaea
+    }
 
     &:not(:last-child) {
         border-bottom: 1px solid #ddd
     }
 }
 
-.player__name {
-    flex: 1 50%;
-}
-
 .player__index {
     flex: 1 10%;
 }
 
-.player__level {
-    flex: 1 20%;
+.player__name {
+    flex: 1 50%;
 }
 
 .player__vocation {
+    flex: 1 20%;
+}
+
+.player__filter {
     flex: 1 20%;
 }

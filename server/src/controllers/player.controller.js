@@ -19,12 +19,12 @@ import { paginate } from "../models/player.model"
 // }
 
 const getPlayers = async (req, res) => {
-  const { options } = req.query
+  const { page, limit, filterBy, orderBy } = req.query
   let params = {
-    page: options.page ? options.page : 1,
-    limit: options.limit ? options.limit : 10,
-    filterBy: options.filterBy ? options.filterBy : "level",
-    orderBy: options.orderBy ? options.orderBy : "DESC"
+    page: page ? page : 1,
+    limit: limit ? limit : 10,
+    filterBy: filterBy ? filterBy : "level",
+    orderBy: orderBy ? orderBy : "DESC"
   }
 
   try {
