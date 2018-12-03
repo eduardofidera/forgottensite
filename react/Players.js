@@ -1,16 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react"
+
+import Player from "./Player"
 
 class Players extends React.Component {
   state = {
-    players: [],
+    players: []
   }
 
   async componentDidMount() {
-    const raw = await fetch('/api/players')
+    const raw = await fetch("/api/players")
     const players = await raw.json()
 
     this.setState({
-      players: players.data,
+      players: players.data
     })
   }
 
@@ -19,14 +21,7 @@ class Players extends React.Component {
     return (
       <Fragment>
         <h1>Players</h1>
-        {players
-          ? players.map(player => (
-              <Fragment>
-                <h2>{player.name}</h2>
-                <p>level: {player.level}</p>
-              </Fragment>
-            ))
-          : 'no players'}
+        {players ? players.map(player => <Player key={player.id} {...player} />) : "no players"}
       </Fragment>
     )
   }

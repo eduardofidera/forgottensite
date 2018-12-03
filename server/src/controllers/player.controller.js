@@ -19,13 +19,16 @@ import { paginate } from "../models/player.model"
 // }
 
 const getPlayers = async (req, res) => {
-  let options = {
-    page: req.query.page ? req.query.page : 1,
-    limit: req.query.limit ? req.query.limit : 10
+  const { options } = req.query
+  let params = {
+    page: options.page ? options.page : 1,
+    limit: options.limit ? options.limit : 10,
+    filterBy: options.filterBy ? options.filterBy : "level",
+    orderBy: options.orderBy ? options.orderBy : "DESC"
   }
 
   try {
-    const players = await paginate(options)
+    const players = await paginate(params)
     return res.status(200).json({ status: 200, data: players, message: "Players recebidos com sucesso!" })
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message })
