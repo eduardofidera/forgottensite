@@ -12,11 +12,6 @@ const Navbar = () => (
     </ul>
     <ul className="navbar__main">
       <li>
-        <NavLink activeClassName="active" to="/players">
-          <span>Players</span>
-        </NavLink>
-      </li>
-      <li>
         <NavLink activeClassName="active" to="/ranking">
           <span>Ranking</span>
         </NavLink>
