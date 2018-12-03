@@ -5,7 +5,9 @@ class Ranking extends Component {
   state = {
     options: {
       filterBy: "level",
-      orderBy: "DESC"
+      orderBy: "DESC",
+      page: 1,
+      limit: 5
     },
     players: []
   }
@@ -25,10 +27,13 @@ class Ranking extends Component {
   getPlayers = async () => {
     const { options } = this.state
     const raw = await fetch(`/api/players?${this.getUrlConvertedFromJson(options)}`)
-    const players = await raw.json()
+    const result = await raw.json()
+
+    const { data: players, maxRows } = result
 
     this.setState({
-      players: players.data
+      players,
+      maxRows
     })
   }
 
@@ -42,11 +47,32 @@ class Ranking extends Component {
     this.getPlayers()
   }
 
-  render() {
-    const { players, options } = this.state
-    const { filterBy, orderBy } = options
-    const { handleOptionChange } = this
+  handlePageChange = async page => {
+    let { options, maxRows } = this.state
+    switch (page) {
+      case "next":
+        options.page++
+        await this.setState({
+          options
+        })
+        break
 
+      case "prev":
+        options.page--
+        await this.setState({
+          options
+        })
+        break
+    }
+    this.getPlayers()
+  }
+
+  render() {
+    const { players, options, maxRows } = this.state
+    const { filterBy, orderBy } = options
+    const { handleOptionChange, handlePageChange } = this
+
+    console.log(maxRows)
     if (!players.length) {
       return null
     }
@@ -70,7 +96,16 @@ class Ranking extends Component {
           <span className="header__filter">{filterBy}</span>
         </p>
         {players &&
-          players.map((player, i) => <Player key={player.id} {...player} index={i + 1} filterBy={player[filterBy]} />)}
+          players.map((player, i) => (
+            <Player
+              key={player.id}
+              {...player}
+              index={(options.page - 1) * options.limit + i + 1}
+              filterBy={player[filterBy]}
+            />
+          ))}
+        <span onClick={() => handlePageChange("prev")}>previous</span>
+        <span onClick={() => handlePageChange("next")}> next</span>
       </div>
     )
   }
