@@ -1,14 +1,19 @@
 .player {
     display: flex;
-    padding: 10px 0;
+    padding: 10px 6px;
     background: #fafafa;
+    font-size: 14px;
 
     &:nth-child(even) {
         background: #eaeaea
     }
 
     &:not(:last-child) {
-        border-bottom: 1px solid #ddd
+        border-bottom: 1px solid darken(#fafafa, 10);
+
+        &:nth-child(even) {
+            border-bottom: 1px solid darken(#eaeaea, 10)
+        }
     }
 }
 
@@ -18,6 +23,9 @@
 
 .player__name {
     flex: 1 50%;
+    color: #0277bd;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .player__vocation {

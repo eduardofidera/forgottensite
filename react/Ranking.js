@@ -4,7 +4,8 @@ import Player from "./Player"
 class Ranking extends Component {
   state = {
     options: {
-      filterBy: "level"
+      filterBy: "level",
+      orderBy: "DESC"
     },
     players: []
   }
@@ -31,9 +32,9 @@ class Ranking extends Component {
     })
   }
 
-  handleFilterChange = e => {
+  handleOptionChange = (option, e) => {
     let { options } = this.state
-    options.filterBy = e.target.value
+    options[option] = e.target.value
     this.setState({
       options
     })
@@ -43,8 +44,8 @@ class Ranking extends Component {
 
   render() {
     const { players, options } = this.state
-    const { filterBy } = options
-    const { handleFilterChange } = this
+    const { filterBy, orderBy } = options
+    const { handleOptionChange } = this
 
     if (!players.length) {
       return null
@@ -53,10 +54,14 @@ class Ranking extends Component {
     return (
       <div className="ranking">
         <h1>Highscores</h1>
-        <select name="ranking__filter" value={filterBy} onChange={handleFilterChange}>
+        <select name="ranking__filter" value={filterBy} onChange={e => handleOptionChange("filterBy", e)}>
           <option value="level">Level</option>
           <option value="maglevel">Magic Level</option>
           <option value="shielding">Shielding</option>
+        </select>
+        <select name="ranking__order" value={orderBy} onChange={e => handleOptionChange("orderBy", e)}>
+          <option value="DESC">DESC</option>
+          <option value="ASC">ASC</option>
         </select>
         <p className="ranking__header">
           <span className="header__index">#</span>

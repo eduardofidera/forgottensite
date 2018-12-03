@@ -6,8 +6,12 @@
 .ranking__header {
     display: flex;
     margin: 0;
-    padding: 10px 0;
-    background: #dadada;
+    border-bottom: 1px solid darken(#dadada, 10);
+    padding: 10px 6px;
+    background: #626262;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
 .header__index {
