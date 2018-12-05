@@ -20,7 +20,7 @@ import { paginate } from "../models/player.model"
 
 const getPlayers = async (req, res) => {
   const { page, limit, filterBy, orderBy } = req.query
-  let params = {
+  const params = {
     page: page ? page : 0,
     limit: limit ? limit : 10,
     filterBy: filterBy ? filterBy : "level",
